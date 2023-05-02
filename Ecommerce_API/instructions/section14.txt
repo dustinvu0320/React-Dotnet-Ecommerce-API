@@ -1,0 +1,30 @@
+*** .NET API - Authentication and Authorization
+
+- Create LoginRequestDTO & LoginResponseDTO & RegisterRequestDTO
+
+- Add Role for admin & customer in Utility SD
+
+- In order to generate a secure token, we need secure key
+ + Create a secure key inside appsettings.json
+
+- Create AuthController and start implementing
+ + Access configuration values in appsettings using IConfiguration to GetValue for secrecKey
+ + Inject UserManager & RoleManager from .Net Identiy into AuthController
+
+- Implement Register method in AuthController
+ + Use some helper methods provided from Identity Framework
+
+- Implement Login method in AuthController
+ + Secret key need to convert to byte array
+ + Work on JWT Token
+  * We can define what are properties we want to add in a token
+  * Use some helper methods provided from Identity Framework & JWT
+
+- Authentication: if username & password is valid
+
+- Add UseAuthentication in Program.cs *** MUST BE BEFORE UseAuthorization
+ + Add Authentication in builder.Services
+ + Add Cors
+
+- Add Security to SwaggerGen inside Program.cs
+ + Basically a Swagger documents to add support for JWT better

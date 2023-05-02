@@ -1,0 +1,64 @@
+*** .NET API - Basic Setup
+
+- Setup Storage Account for image on Azure
+ + Create Storage Account in Azure Portal
+ + Create new Container then upload all images inside
+
+- Create new project for API on Visual Studio
+ + Create ASP.NET API web project
+
+- Install some packages in NuGet
+ + AspNetCore.JwtBearer
+ + AspNetCore.Identity.EntityFrameworkCore
+ + EntityFrameworkCore.SqlServer
+ + Azure.Storage.Blobs : for images uploaded on Azure Portal
+ + EntityFrameworkCore.Tools : for database migrations
+ + Microsoft.AspNetCore.Mvc.NewtonsoftJson : for convert sth to JSON
+
+- Setup database string inside appsettings.json
+
+- Then configure the DBContext in Entity Framework inside project
+ + Create Data folder
+  * Create new class ApplicationDbContext : IdentityDbContext (help on authen&autho)
+   ` Pass connection string as an option inside here
+
+- Configure service pipeline insisde Program.cs class
+ + Add DbContext builder to use SqlServer connection string
+ + Add Identity builder to use define user and role 
+
+- Run command NuGet package: 
+ + add-migration initalMigration : create new migration
+ + update-database : make generate new or update database for us
+
+- Extends more fields for IdentityUser table
+ + Create new Models folder
+  * Create ApplicationUser class extends from IdentityUser
+   ` add-migration && update-database
+ + Add DbSet for ApplicationUser inside DbContext
+
+- Create MenuItem class table inside Models and add DbSet into DbContext
+ + add-migration && update-database
+
+- Seed data for MenuItem
+ + override OnModelCreating method in DbContext and add seed data
+
+- Create MenuItemController : to get menu items and API response
+ + Add Http Request & Reponse to get data from db
+ + Implement GET request for all menu items
+
+- Create ApiResponse class in Models : values need to work with API response
+
+- Implement GET request for single menu item based on id
+
+- Add Storage Account Connection String : help access Azure storage
+ + Retrieve connection string from access keys of Azure storage account and add into appsetting.json
+
+- Create Services folder and create IBlobService class inside
+ + Create 3 Task methods to Get, Delete, Upload Blob
+ + Create BlobService : IBlobService to implement these functions
+
+- Register the blob service inside container Program.cs && add connection string
+
+- Using dependency injection by inject BlobServiceClient (Azure Blob Storage package) inside BlobService
+ + Start implementing BlobService methods
+ + So, we can consume these inside MenuItemController

@@ -1,0 +1,54 @@
+*** .NET API - Shopping Cart and Order
+
+- Create ShoppingCart Model table
+ + Create CartItem Model : that ShoppingCart have ICollection<CartItem>
+ + [NotMapped] : wiil be there in model but not add column to database
+ + Add these models DbSet in DbContext
+ + add-migration and update-database
+
+- Download & Install EF Core Power Tools
+ + We'll be able to see view diagram & relationship between tables from our database
+
+- Add Endpoint for ShoppingCart : Create ShoppingCartController
+
+- Implement AddOrUpdateItemInCart function inside ShoppingCartController
+ + When working with ForeignKey, MenuItem is a navigational property, set that to be null. If not, it will auto try to create new MenuItem
+ + Use Include() method to get all variables
+ + Work on 4 different scenarios stated in code
+
+- Implement GetShoppingCart function inside ShoppingCartController
+ + Use Include().ThenInclude() to get MenuItem from CartItem from ShoppingCart (get grandchild data)
+
+- Create OrderHeader & OrderDetails Models
+ + Add these 2 DbSet in DbContext
+ + add-migration & update-database
+
+- Create OrderHeaderCreateDTO & OrderHeaderUpdateDTO & OrderDetailsCreateDTO
+
+- Create endpoint for Order : Create OrderController
+ + Implement GetOrders & GetOrder inside
+
+- Implement CreateOrder inside OrderController
+ + Store all const status for Order inside SD Utility
+ + Convert all DTO to Model and save to DB
+
+- Implement UpdateOrder inside OrderController
+ + Check what values need to be updated
+
+- Create Stripe Payment endpoint
+ + Learn about Stripe Intent API https://stripe.com/docs/api/payment_intents/create?lang=dotnet
+ + Create PaymentController
+ + Store Stripe Secret Key for API in appsettings.json
+
+- Create HttpPost MakePayment method in PaymentController
+ + Install Stripe.net NuGet package
+ + Create a region for Payment Intent : where to configure Stripe API payment
+ + Follow step to create payment intent
+
+- Deploy API to Azure
+ + Publish API folder
+ + Choose Azure / App Service (Windows)
+ + Signin to Microsoft account
+ + Create new deployment
+ + Select region and free usage
+ + Skip step for API Management

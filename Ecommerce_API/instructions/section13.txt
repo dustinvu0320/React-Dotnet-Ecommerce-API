@@ -1,0 +1,12 @@
+*** .NET API - Menu Item
+
+- Create MenuItemDto for MenuItem since we also need id
+
+- DTO using when we don't want to expose your domain objects directly to API
+ + Create MenuItemCreateDTO & MenuItemUpdateDTO
+
+- Implement CreateMenuItem HttpPost in MenuItemController
+ + Inject IBlobService inside this Controller to convert image upload type into string for database stored
+ + Create Utility folder, then create SD static class inside to store StorageContainer name
+
+- Implement UpdateMenuItem & DeleteMenuItem based on code of CreateMenuItem
